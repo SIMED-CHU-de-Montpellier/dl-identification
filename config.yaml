@@ -1,0 +1,37 @@
+mlflow:
+  tracking_uri: http://localhost:8080
+  artifacts_base_path: /Data/mlflow/artifacts
+
+data:
+  train_path: /Data/datasets/dicom/train-transform
+  val_path: /Data/datasets/dicom/val-transform
+  test_path: /Data/datasets/dicom/test-transform
+
+model:
+  backbone: convnexts
+  embedding_size: 512
+  margin: 0.2
+
+training:
+  num_val_triplets: 3000
+  num_workers: 16
+  epochs: 30
+
+validation:
+  experiment-name: panoramique-convnexts
+  n_splits: 3
+  batch_size: 32
+
+sampler:
+  P: 48
+  K: 2
+
+optimizer:
+  name: adamw
+  backbone_lr: 0.00005
+  fc_lr: 0.001
+  weight_decay: 0.00000001
+
+runtime:
+  n_runs: 5
+  tmp_dir: /tmp/ml_runs
